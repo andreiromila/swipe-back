@@ -44,10 +44,10 @@ rightArrow.src = IMAGE_LEFT_ARROW;
 container.appendChild(leftArrow);
 container.appendChild(rightArrow);
 
-let postitionScale = 6;
+let positionScale = 5;
 let position = 0;
 let freezeUntil = 0;
-let fadeDelay = 500;
+let fadeDelay = 1000;
 let resetTimeoutID = 0;
 let transitionTimeoutID = 0;
 
@@ -84,12 +84,12 @@ function animateArrow(arrowElement) {
   if (arrow === leftArrow) {
     arrow.style.left = `${
       imageInitialLeft +
-      Math.min(position, 120 * postitionScale) / postitionScale
+      Math.min(position, 200 * positionScale) / positionScale
     }px`;
   } else {
     arrow.style.right = `${
       imageInitialLeft +
-      Math.min(-position, 120 * postitionScale) / postitionScale
+      Math.min(-position, 200 * positionScale) / positionScale
     }px`;
   }
 
@@ -109,11 +109,11 @@ function handleWheel(event) {
     return;
   }
   position -= event.deltaX;
-  if (position > 150 * postitionScale) {
-    position = 150 * postitionScale;
+  if (position > 150 * positionScale) {
+    position = 150 * positionScale;
   }
-  if (position < -150 * postitionScale) {
-    postitionScale = -150 * postitionScale;
+  if (position < -150 * positionScale) {
+    position = -150 * positionScale;
   }
 
   if (position > 0) {
@@ -125,7 +125,7 @@ function handleWheel(event) {
   window.clearTimeout(resetTimeoutID);
   resetTimeoutID = window.setTimeout(resetPosition, fadeDelay);
 
-  if (position >= 130 * postitionScale || position <= -130 * postitionScale) {
+  if (position >= 150 * positionScale || position <= -150 * positionScale) {
     freezeUntil = Date.now() + 500;
     if (position > 0) {
       historyBack();
@@ -148,10 +148,6 @@ function handleScroll(event) {
 }
 
 function main() {
-  // @ts-ignore
-  if (/Mac/.test(window.navigator.platform)) {
-    return;
-  }
   document.body.appendChild(container);
   document.addEventListener("wheel", handleWheel);
   document.addEventListener("scroll", handleScroll, { capture: true });

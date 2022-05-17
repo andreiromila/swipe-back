@@ -5,6 +5,11 @@
   width: var(--size);
   height: var(--size);
   z-index: 100;
+
+  border-radius: 100%;
+  border: 1px solid #f2f2f2;
+
+  background-color: white;
 }
 
 .swipe-back-arrow-left {
